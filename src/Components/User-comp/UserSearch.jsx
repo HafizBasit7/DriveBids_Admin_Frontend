@@ -13,19 +13,16 @@ const theme = {
 function UserSearch({ searchTerm, onSearchChange }) {
   return (
     <TextField
-      placeholder="Search users by email..."
+      placeholder="Search users..."
       value={searchTerm}
       onChange={(e) => onSearchChange(e.target.value)}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <Search />
-          </InputAdornment>
-        ),
-      }}
-      sx={{ 
+      size="small"
+      sx={{
         width: 300,
         '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: theme.greycolor,
+          },
           '&:hover fieldset': {
             borderColor: theme.buttoncolor,
           },
@@ -34,8 +31,15 @@ function UserSearch({ searchTerm, onSearchChange }) {
           },
         },
       }}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <Search sx={{ color: theme.greycolor }} />
+          </InputAdornment>
+        ),
+      }}
     />
   );
 }
 
-export default UserSearch; 
+export default UserSearch;

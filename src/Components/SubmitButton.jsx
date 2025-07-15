@@ -8,31 +8,42 @@ const createUserAndCar = async (payload) => {
   return data;
 };
 
-// components/SubmitButton.jsx
 const SubmitButton = ({ userData, carData, inspectionReport, damageReport }) => {
   const mutation = useMutation({
     mutationFn: () => {
-      const name = userData.location?.name?.trim();
-      const coordinates = Array.isArray(userData.location?.coordinates)
+      const userLocationName = userData.location?.name?.trim();
+      const userCoordinates = Array.isArray(userData.location?.coordinates)
         ? userData.location.coordinates.map((val) => parseFloat(val)).filter((n) => !isNaN(n))
         : [];
 
-      console.log("Location Name:", name);
-      console.log("Coordinates Raw:", coordinates);
+      const carLocationName = carData.location?.name?.trim();
+      const carCoordinates = Array.isArray(carData.location?.coordinates)
+        ? carData.location.coordinates.map((val) => parseFloat(val)).filter((n) => !isNaN(n))
+        : [];
 
-      if (!name || coordinates.length !== 2) {
-        throw new Error('Please provide a valid user location name and coordinates.');
+      console.log("User Location:", userLocationName, userCoordinates);
+      console.log("Car Location:", carLocationName, carCoordinates);
+
+      if (!userLocationName || userCoordinates.length !== 2) {
+        throw new Error('Please provide a valid user location.');
+      }
+
+      if (!carLocationName || carCoordinates.length !== 2) {
+        throw new Error('Please provide a valid car location.');
       }
 
       return createUserAndCar({
         ...userData,
         location: {
-          name,
-          coordinates,
+          name: userLocationName,
+          coordinates: userCoordinates,
         },
         carDetails: {
           ...carData,
-          location: carData.location || {},
+          location: {
+            name: carLocationName,
+            coordinates: carCoordinates,
+          },
         },
         inspectionReport,
         damageReport,
@@ -51,14 +62,16 @@ const SubmitButton = ({ userData, carData, inspectionReport, damageReport }) => 
       >
         {mutation.isPending ? <CircularProgress size={24} /> : 'Submit'}
       </Button>
+
       {mutation.isSuccess && (
         <Box mt={2} color="green">
-          Success! User & Car created.
+          ✅ Success! User & Car created.
         </Box>
       )}
+
       {mutation.isError && (
         <Box mt={2} color="red">
-          Error: {mutation.error.message}
+          ❌ Error: {mutation.error.message}
         </Box>
       )}
     </Box>

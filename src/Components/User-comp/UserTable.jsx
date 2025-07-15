@@ -15,7 +15,10 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Pagination,
+  Typography,
+  Stack
 } from '@mui/material';
 import {
   Visibility,
@@ -32,7 +35,7 @@ const theme = {
   greycolor: "#aaa"
 };
 
-function UserTable({ users, onStatusChange }) {
+function UserTable({ users, onStatusChange, pagination, onPageChange }) {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedUser, setSelectedUser] = React.useState(null);
@@ -82,6 +85,10 @@ function UserTable({ users, onStatusChange }) {
     return [sellerInfo, buyerInfo].filter(Boolean).join(', ');
   };
 
+  const handlePageChange = (event, value) => {
+    onPageChange(value);
+  };
+
   return (
     <Card>
       <TableContainer>
@@ -127,6 +134,36 @@ function UserTable({ users, onStatusChange }) {
         </Table>
       </TableContainer>
 
+      {/* Pagination Section */}
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography variant="body2" color="text.secondary">
+          Showing {((pagination.currentPage - 1) * pagination.limit) + 1} to{' '}
+          {Math.min(pagination.currentPage * pagination.limit, pagination.totalUsers)} of{' '}
+          {pagination.totalUsers} users
+        </Typography>
+        
+        <Stack spacing={2}>
+          <Pagination
+            count={pagination.totalPages}
+            page={pagination.currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            sx={{
+              '& .MuiPaginationItem-root': {
+                color: theme.buttoncolor,
+              },
+              '& .Mui-selected': {
+                backgroundColor: theme.buttoncolor,
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: theme.hoverBackground,
+                },
+              },
+            }}
+          />
+        </Stack>
+      </Box>
+
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -157,4 +194,4 @@ function UserTable({ users, onStatusChange }) {
   );
 }
 
-export default UserTable; 
+export default UserTable;

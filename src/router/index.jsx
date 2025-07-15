@@ -8,12 +8,9 @@ import SellerDetails from '../Pages/SellerDetails';
 import CarDetails from '../Pages/CarDetails';
 import CarBidHistory from '../Pages/CarBidHistory';
 import Login from '../Pages/Login';
-import CreateUserCar from '../Pages/CreateUserCar';
-import CarAdEntryPage from '../Pages/AdminCarListPages/CarAdEntryPage'
-import VehicleRegistrationStep from '../Pages/AdminCarListPages/VehicleRegistrationStep'
-import AdminPostAdSteps from '../Pages/AdminCarListPages/AdminPostAdSteps'
-
 import CreateUserAndCar from '../Pages/CreateUserAndCar';
+
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
@@ -60,22 +57,6 @@ export const router = createBrowserRouter([
         path: 'cars/:carId/bids',
         element: <CarBidHistory />,
       },
-      {
-        path: 'create-user-car',
-        element: <CreateUserCar />,
-      },
-      {
-  path: 'create-user-car/start',
-  element: <CarAdEntryPage />
-},
-{
-  path: 'create-user-car/vehicle-register',
-  element: <VehicleRegistrationStep />
-},
-      {
-  path: 'create-user-car/steps',
-  element: <AdminPostAdSteps />,
-},
 
 
 

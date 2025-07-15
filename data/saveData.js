@@ -1,8 +1,8 @@
 // src/data/saveData.js
 
 export const savedUserData = {
-  name: "Hamza Khan",
-  email: "hamza@example.com",
+  name: "Embedding Check again",
+  email: "Embeddingagain@example.com",
   type: "individual",
   businessAddress: "Model Town, Lahore",
   phoneNumber: { countryCode: "+92", phoneNo: "3001234567" },
@@ -14,7 +14,7 @@ export const savedUserData = {
 };
 
 export const savedCarData = {
-  title: "Honda Civic 2020",
+  title: "Embedding Check____again 2025",
   regNo: "LEC-2020",
   description: "Top condition, no accidents, single owner.",
   make: "Honda",
@@ -39,34 +39,23 @@ export const savedCarData = {
   },
   postedOn: new Date().toISOString().slice(0, 16),
   duration: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().slice(0, 16), // +3 days
-  images: {
-    exterior: [
-      {
-        url: "https://via.placeholder.com/150",
-        type: "image",
-      },
-    ],
-    interior: [
-      {
-        url: "https://via.placeholder.com/150",
-        type: "image",
-      },
-    ],
-    wheels: [
-      {
-        url: "https://via.placeholder.com/150",
-        type: "image",
-      },
-    ],
-    tyreTreads: [
-      {
-        url: "https://via.placeholder.com/150",
-        type: "image",
-      },
-    ],
-    carVideo: [], // You can add { url: "...", type: "video" } here if needed later
-  },
+images: {
+  exterior: [],
+  interior: [],
+  wheels: [],
+  tyreTreads: [],
+  carVideo: [],
+},
+
+  // ✅ Add these missing fields:
+  staringBidPrice: 1000, // fix typo if applicable
+  reserveBidPrice: 15000,
+  buyNowPrice: 20000,
+  
+  traderDiscount: 0,
 };
+
+
 
 export const savedInspectionReport = {
   interiorChecks: {

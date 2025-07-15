@@ -9,6 +9,7 @@ import {
   MenuItem
 } from '@mui/material';
 import { uploadImage, uploadVideo } from "../../utils/upload";
+import LocationInput from "../../Location/LocationInput"; // Import this at the top
 
 
 const CarForm = ({ carData, setCarData }) => {
@@ -289,26 +290,18 @@ const handleCoordinateChange = (e) => {
           </TextField>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
-          <TextField
-            label="Location Name"
-            name="name"
-            fullWidth
-            value={carData.location?.name || ''}
-            onChange={handleLocationChange}
-          />
-        </Grid>
+<Grid item xs={12} sm={6}>
+  <LocationInput
+    value={carData.location?.name || ""}
+    handleChange={(location) =>
+      setCarData((prev) => ({
+        ...prev,
+        location,
+      }))
+    }
+  />
+</Grid>
 
-        <Grid item xs={6} sm={3}>
-        <TextField
-  label="Coordinates"
-  fullWidth
-  value={coordinateInput}
-  onChange={handleCoordinateChange}
-  placeholder="e.g. 31.5204, 74.3587"
-/>
-
-        </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
